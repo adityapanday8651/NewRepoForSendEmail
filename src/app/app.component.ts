@@ -76,6 +76,6 @@ export class AppComponent implements OnInit {
       message: 'This is Message Good'
     });
 
-    alert("Message has been send");
+    alert("Message has been send");  // This is confirm messages
   }
 }
