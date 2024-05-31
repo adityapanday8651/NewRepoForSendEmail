@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { DataRequestService } from './services/data-request.service';
-import emailjs from '@emailjs/browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,14 @@ export class AppComponent implements OnInit {
   title = 'PradanDataDeleteRequest';
   dataDeleteRequestForm: FormGroup | any;
   public loginStatusMessage: any;
+  public submitted = false;
+  public responseStatus: any;
 
-  constructor(private fb: FormBuilder, private dataRequestServices: DataRequestService) { }
+  constructor(
+    private fb: FormBuilder,
+    private dataRequestServices: DataRequestService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   async ngOnInit() {
     await this.formWithValidation();
@@ -28,7 +34,13 @@ export class AppComponent implements OnInit {
       languageId: [1, '']
     });
   }
+  
+  // convenience getter for easy access to form fields
+  get f() { return this.dataDeleteRequestForm.controls; }
 
+  onBlur(controlName: string) {
+    this.dataDeleteRequestForm.controls[controlName].markAsTouched();
+  }
 
   emailOrMobileValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
@@ -45,37 +57,27 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.dataDeleteRequestForm.markAllAsTouched();
     if (this.dataDeleteRequestForm.valid) {
+      this.spinner.show();
       this.dataRequestServices.pradanDataDeleteRequest(this.dataDeleteRequestForm.value).subscribe(
         response => {
-          if (response.Status) {
+          this.responseStatus = response.Status;
+          if (this.responseStatus) {
 
             this.loginStatusMessage = "Your request has been received successfully. The PRADAN team will review the details and get back to you shortly. We appreciate your patience and are here to assist you with any further queries or support you may need.";
-            this.send();
           } else {
             this.loginStatusMessage = response.Message;
           }
+          this.spinner.hide();
         },
         error => {
           console.error('Error:', error);
-          // Handle error response
         }
       );
     } else {
-      console.error('Form is invalid');
+      return;
     }
-  }
-
-  async send() {
-    emailjs.init('gceotaLxGcKv7t47S');
-    let response = await emailjs.send('service_izigtr8', 'template_gnsxsmj', {
-      from_name: 'Aditya Pandey',
-      to_name: 'Pradhan',
-      from_email: 'adityapanday8651@gmail.com',
-      subject: 'This is subject',
-      message: 'This is Message Good'
-    });
-
-    alert("Message has been send");
   }
 }

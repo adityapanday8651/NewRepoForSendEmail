@@ -1,24 +1,144 @@
-.heading-title{
-    text-align: center;
-    font-weight: bold;
+/* Default styles */
+
+/* Heading styles */
+.heading-title {
+  text-align: center;
+  font-weight: bold;
 }
 
+/* Body styles */
 body {
-    background: #f7f7f7;
-  }
-  
+  background-image: url('/assets/images/PradhanLogos.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
+  margin: 0;
+  /* Reset default body margin */
+  padding: 0;
+  /* Reset default body padding */
+}
+
+/* Form styles */
+.form-box {
+  max-width: 500px;
+  margin: 18rem auto;
+  /* Center the form horizontally and adjust vertical margin */
+  padding: 49px;
+  background-image: url('/assets/images/PradhanLogos.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.logo-img {
+  bottom: 0;
+  display: block;
+  height: 30%;
+  left: 0;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+/* Center text elements */
+h1,
+p {
+  text-align: center;
+}
+
+/* Input styles */
+input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  /* Include padding and border in the width */
+}
+
+/* Button styles */
+.submitButton {
+  margin: 15px auto;
+  /* Center the button horizontally */
+  background-color: #097969;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.2em;
+  padding: .65rem 1rem;
+  position: relative;
+  text-transform: uppercase;
+  width: 100%;
+  cursor: pointer;
+  /* Add pointer cursor */
+}
+
+/* Label styles */
+.labelClass {
+  margin-bottom: 7px;
+  margin-top: 6px;
+}
+
+/* Color styles */
+.green-color {
+  color: #097969;
+}
+
+.red-color {
+  color: #C70039;
+}
+
+.mandotary {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Validation styles */
+.is-invalid {
+  border-color: red;
+}
+
+.invalid-feedback {
+  color: red;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+
+  /* Adjust margin for smaller screens */
   .form-box {
-    max-width: 500px;
-    margin: auto;
-    padding: 50px;
-    background: #ffffff;
-    border: 10px solid #f2f2f2;
+    margin: 8rem auto;
   }
-  
-  h1, p {
-    text-align: center;
+
+  /* Adjust font sizes for smaller screens */
+  .heading-title {
+    font-size: 1.5rem;
   }
-  
-  input, textarea {
-    width: 100%;
+
+  /* Adjust button margin for smaller screens */
+  .submitButton {
+    margin: 15px auto;
   }
+
+
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .spinner-container {
+      padding: 20px;
+      /* Add some padding for smaller screens */
+    }
+  }
+
+  /* Media query for screens larger than 1200px */
+  @media (min-width: 1200px) {
+
+    /* Adjust container width */
+    .container {
+      max-width: 1200px;
+      /* Limit maximum width to prevent content from stretching too wide */
+      margin: 0 auto;
+      /* Center container horizontally */
+    }
+  }
+
+}
